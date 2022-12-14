@@ -94,10 +94,10 @@
 
 &pll {
 	div-m = <1>;
-	mul-n = <20>;
+	mul-n = <10>;
 	div-p = <7>;
 	div-q = <2>;
-	div-r = <4>;
+	div-r = <2>;
 	clocks = <&clk_hsi>;
 	status = "okay";
 };
