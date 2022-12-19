@@ -1,5 +1,5 @@
 # Copyright (c) 2022 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-rsource "gpio/Kconfig"
-rsource "led_strip/Kconfig"
+rsource "Kconfig.composite"
+rsource "Kconfig.ckled2001"
