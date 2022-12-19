@@ -2,10 +2,18 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: hal_stm32
+      remote: zephyrproject-rtos
+      revision: 34ec9441777290be6b860b4669d86ad7ab5f6522
+      path: modules/hal/stm32
+      groups:
+        - hal
   self:
     path: config
