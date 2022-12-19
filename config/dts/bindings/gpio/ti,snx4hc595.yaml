@@ -1,0 +1,32 @@
+# Copyright (c) 2022 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: TI SNx4HC595 8-bit Shift Register
+
+compatible: "ti,snx4hc595"
+
+include: gpio-controller.yaml
+
+properties:
+  label:
+    type: string
+    required: true
+
+  "#gpio-cells":
+    const: 2
+
+  ser-gpios:
+    type: phandle-array
+    required: true
+
+  srclk-gpios:
+    type: phandle-array
+    required: true
+
+  rclk-gpios:
+    type: phandle-array
+    required: true
+
+gpio-cells:
+  - pin
+  - flags

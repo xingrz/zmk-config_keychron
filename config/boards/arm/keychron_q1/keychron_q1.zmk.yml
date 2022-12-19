@@ -1,0 +1,12 @@
+file_format: "1"
+id: keychron_q1
+name: Keychron Q1
+type: board
+arch: arm
+features:
+  - keys
+  - underglow
+  - encoder
+outputs:
+  - usb
+url: https://www.keychron.com/products/keychron-q1

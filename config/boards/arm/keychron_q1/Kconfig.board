@@ -1,0 +1,8 @@
+# Keychron Q1 board configuration
+
+# Copyright (c) 2022 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+config BOARD_KEYCHRON_Q1
+	bool "Keychron Q1"
+	depends on SOC_STM32L432XX

@@ -1,0 +1,7 @@
+identifier: keychron_q1
+name: Keychron Q1
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
