@@ -9,9 +9,9 @@ This repository is the configuration used to build [ZMK firmware](https://github
 
 ## Flash
 
-1. Download a latest build of ZMK firmware from [Releases](https://github.com/xingrz/zmk-config_keychron_q1/releases)
-2. Enter DFU mode by holing the "RESET" button hidden under the space bar keycap and re-plug your USB cable
-2. Open [WebDFU](https://devanlai.github.io/webdfu/dfu-util/), select the firmware, and click "Download"
+1. Download the latest build of ZMK firmware from [Releases](https://github.com/xingrz/zmk-config_keychron_q1/releases)
+2. Enter DFU mode by holding the "RESET" button hidden under the space bar keycap and re-plug your USB cable
+2. Open [WebDFU](https://devanlai.github.io/webdfu/dfu-util/), select the firmware, and then click "Download"
 
 ## Customize
 
@@ -19,7 +19,7 @@ You can fork this repository to your own GitHub account and do any modification.
 
 ### Keymap
 
-This firmware implements the default keymap of stock firmware as close as possible. You can customize it with [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) or just edit [`keychron_q1.keymap`](config/keychron_q1.keymap) manually.
+This firmware tries to match the default keymap of the stock firmware as closely as possible, but you can customize it using the [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) or by manually editing the [`keychron_q1.keymap`](config/keychron_q1.keymap).
 
 ### Lights
 
