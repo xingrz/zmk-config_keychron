@@ -19,7 +19,7 @@ You can fork this repository to your own GitHub account and do any modification.
 
 ### Keymap
 
-This firmware tries to match the default keymap of the stock firmware as closely as possible, but you can customize it using the [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) or by manually editing the [`keychron_q1.keymap`](config/keychron_q1.keymap).
+This firmware is designed to closely mimic the default keymap of the [factory firmware](https://www.keychron.com/blogs/archived/how-to-reset-your-keychron-q1-to-factory-settings), with the exception of the right `Control` key in the Mac layout, which has been changed to the `Option` key to match the layout on MacBooks. You can customize it using the [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) or by manually editing the [`keychron_q1.keymap`](config/keychron_q1.keymap) file.
 
 #### Mac, default
 
