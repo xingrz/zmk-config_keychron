@@ -1,7 +1,7 @@
 zmk-config for Keychron Q1
 ========
 
-![Keychron Q1](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychronq1qmkviacustommechanicalkeyboardrotartyencoderknobversionwithdoublegasketdesignscrewinpcbstabilizerandhotswappablesouthfacingrgbbareboneuslayout-1639996031362.png)
+![Keychron Q1](images/q1.webp)
 
 [Q1](https://www.keychron.com/products/keychron-q1) is a hotswap 75% mechanical keyboard made by Keychron.
 
@@ -20,6 +20,22 @@ You can fork this repository to your own GitHub account and do any modification.
 ### Keymap
 
 This firmware tries to match the default keymap of the stock firmware as closely as possible, but you can customize it using the [ZMK Keymap Editor](https://nickcoutsos.github.io/keymap-editor/) or by manually editing the [`keychron_q1.keymap`](config/keychron_q1.keymap).
+
+#### Mac, default
+
+![keymap 0](images/keymap_0.png)
+
+#### Mac, "Fn" pressed
+
+![keymap 1](images/keymap_1.png)
+
+#### Win, default
+
+![keymap 2](images/keymap_2.png)
+
+#### Win, "Fn" pressed
+
+![keymap 3](images/keymap_3.png)
 
 ### Lights
 
