@@ -13,12 +13,36 @@
 #define WIN_FN 3
 
 / {
+	macros {
+		lock_mac: lock_mac {
+			label = "lock_mac";
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings =
+				<&macro_press   &kp LCTRL>,
+				<&macro_press   &kp LCMD>,
+				<&macro_tap     &kp Q>,
+				<&macro_release &kp LCMD>,
+				<&macro_release &kp LCTRL>;
+		};
+
+		lock_win: lock_win {
+			label = "lock_mac";
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings =
+				<&macro_press   &kp RWIN>,
+				<&macro_tap     &kp L>,
+				<&macro_release &kp RWIN>;
+		};
+	};
+
 	keymap {
 		compatible = "zmk,keymap";
 
 		mac_base {
 			bindings = <
-				&kp ESC   &kp C_BRI_DEC &kp C_BRI_INC &none   &none   &rgb_ug RGB_BRD &rgb_ug RGB_BRI &kp C_PREV  &kp C_PP  &kp C_NEXT  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp DEL             &kp C_MUTE
+				&kp ESC   &kp C_BRI_DEC &kp C_BRI_INC &none   &none   &rgb_ug RGB_BRD &rgb_ug RGB_BRI &kp C_PREV  &kp C_PP  &kp C_NEXT  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp DEL             &lock_mac
 				&kp GRAVE &kp N1        &kp N2        &kp N3  &kp N4  &kp N5          &kp N6          &kp N7      &kp N8    &kp N9      &kp N0      &kp MINUS     &kp EQUAL     &kp BSPC            &kp PG_UP
 				&kp TAB   &kp Q         &kp W         &kp E   &kp R   &kp T           &kp Y           &kp U       &kp I     &kp O       &kp P       &kp LBKT      &kp RBKT      &kp BSLH            &kp PG_DN
 				&kp CLCK  &kp A         &kp S         &kp D   &kp F   &kp G           &kp H           &kp J       &kp K     &kp L       &kp SEMI    &kp SQT                     &kp RET             &kp HOME
@@ -42,7 +66,7 @@
 
 		win_base {
 			bindings = <
-				&kp ESC   &kp F1    &kp F2    &kp F3  &kp F4  &kp F5  &kp F6    &kp F7  &kp F8  &kp F9    &kp F10   &kp F11     &kp F12   &kp DEL             &kp C_MUTE
+				&kp ESC   &kp F1    &kp F2    &kp F3  &kp F4  &kp F5  &kp F6    &kp F7  &kp F8  &kp F9    &kp F10   &kp F11     &kp F12   &kp DEL             &lock_win
 				&kp GRAVE &kp N1    &kp N2    &kp N3  &kp N4  &kp N5  &kp N6    &kp N7  &kp N8  &kp N9    &kp N0    &kp MINUS   &kp EQUAL &kp BSPC            &kp PG_UP
 				&kp TAB   &kp Q     &kp W     &kp E   &kp R   &kp T   &kp Y     &kp U   &kp I   &kp O     &kp P     &kp LBKT    &kp RBKT  &kp BSLH            &kp PG_DN
 				&kp CLCK  &kp A     &kp S     &kp D   &kp F   &kp G   &kp H     &kp J   &kp K   &kp L     &kp SEMI  &kp SQT               &kp RET             &kp HOME
