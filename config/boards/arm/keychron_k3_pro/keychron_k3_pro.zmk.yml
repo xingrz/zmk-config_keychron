@@ -1,0 +1,12 @@
+file_format: "1"
+id: keychron_k3_pro
+name: Keychron K3 Pro
+type: board
+arch: arm
+features:
+  - keys
+  - underglow
+outputs:
+  - usb
+  - ble
+url: https://www.keychron.com/products/keychron-k3-pro-qmk-via-wireless-custom-mechanical-keyboard

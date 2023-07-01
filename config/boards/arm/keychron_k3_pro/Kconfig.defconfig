@@ -1,0 +1,19 @@
+# Copyright (c) 2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+if BOARD_KEYCHRON_K3_PRO
+
+config BOARD
+	default "keychron_k3_pro"
+
+config ZMK_KEYBOARD_NAME
+	default "Keychron K3 Pro"
+
+config ZMK_USB
+	default y
+
+choice ZMK_HID_REPORT_TYPE
+	default ZMK_HID_REPORT_TYPE_NKRO
+endchoice
+
+endif # BOARD_KEYCHRON_K3_PRO

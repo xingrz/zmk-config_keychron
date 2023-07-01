@@ -1,0 +1,7 @@
+identifier: keychron_k3_pro
+name: Keychron K3 Pro
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb

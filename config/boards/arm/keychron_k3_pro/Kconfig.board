@@ -1,0 +1,6 @@
+# Copyright (c) 2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+config BOARD_KEYCHRON_K3_PRO
+	bool "Keychron K3 Pro"
+	depends on SOC_STM32L432XX
