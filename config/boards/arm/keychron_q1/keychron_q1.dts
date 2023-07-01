@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 The ZMK Contributors
+ * Copyright (c) 2022-2023 XiNGRZ
  * SPDX-License-Identifier: MIT
  */
 
@@ -13,7 +13,7 @@
 
 / {
 	model = "Keychron Q1";
-	compatible = "st,stm32l432kb";
+	compatible = "keychron,q1";
 
 	chosen {
 		zephyr,code-partition = &code_partition;
@@ -30,8 +30,7 @@
 	};
 
 	gpio_ex: sn74hc595 {
-		compatible = "ti,snx4hc595";
-		label = "GPIO_EX";
+		compatible = "ti,sn74hc595-bitbang";
 		gpio-controller;
 		#gpio-cells = <2>;
 		ser-gpios = <&gpioa 7 0>;
@@ -41,31 +40,30 @@
 
 	kscan: kscan {
 		compatible = "zmk,kscan-gpio-matrix";
-		label = "KSCAN";
 
 		diode-direction = "col2row";
 		col-gpios = <&gpioc 14  GPIO_ACTIVE_LOW>,
-					<&gpioc 15  GPIO_ACTIVE_LOW>,
-					<&gpioa  0  GPIO_ACTIVE_LOW>,
-					<&gpioa  1  GPIO_ACTIVE_LOW>,
-					<&gpioa  2  GPIO_ACTIVE_LOW>,
-					<&gpioa  3  GPIO_ACTIVE_LOW>,
-					<&gpioa  4  GPIO_ACTIVE_LOW>,
-					<&gpioa  5  GPIO_ACTIVE_LOW>,
-					<&gpio_ex 0 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 1 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 2 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 3 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 4 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 5 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 6 GPIO_ACTIVE_LOW>,
-					<&gpio_ex 7 GPIO_ACTIVE_LOW>;
+		            <&gpioc 15  GPIO_ACTIVE_LOW>,
+		            <&gpioa  0  GPIO_ACTIVE_LOW>,
+		            <&gpioa  1  GPIO_ACTIVE_LOW>,
+		            <&gpioa  2  GPIO_ACTIVE_LOW>,
+		            <&gpioa  3  GPIO_ACTIVE_LOW>,
+		            <&gpioa  4  GPIO_ACTIVE_LOW>,
+		            <&gpioa  5  GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 0 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 1 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 2 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 3 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 4 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 5 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 6 GPIO_ACTIVE_LOW>,
+		            <&gpio_ex 7 GPIO_ACTIVE_LOW>;
 		row-gpios = <&gpiob  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-					<&gpiob  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-					<&gpiob  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-					<&gpioa 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-					<&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-					<&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+		            <&gpiob  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+		            <&gpiob  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+		            <&gpioa 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+		            <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+		            <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 	};
 
 	default_transform: keymap_transform {
@@ -87,16 +85,17 @@
 		label = "ENCODER";
 		a-gpios = <&gpioa 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 		b-gpios = <&gpioa 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-		resolution = <4>;
 	};
 
 	led_strip: led-strip-composite {
 		compatible = "zmk,led-strip-composite";
-		label = "LED_STRIP";
+
 		chain-length = <82>;
+
 		strip-0 {
 			led-strip = <&led_strip_0>;
 		};
+
 		strip-1 {
 			led-strip = <&led_strip_1>;
 		};
@@ -162,10 +161,11 @@
 
 	led_strip_0: ckled2001@77 {
 		compatible = "zmk,ckled2001";
-		label = "LED_STRIP_0";
+
 		reg = <0x77>;
 		chain-length = <45>;
 		#led-strip-cells = <0>;
+
 		map = <
 			/* ROW 0 */
 			/* R        G        B */
@@ -223,10 +223,11 @@
 
 	led_strip_1: ckled2001@74 {
 		compatible = "zmk,ckled2001";
-		label = "LED_STRIP_1";
+
 		reg = <0x74>;
 		chain-length = <37>;
 		#led-strip-cells = <0>;
+
 		map = <
 			/* ROW 3 */
 			/* R        G        B */

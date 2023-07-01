@@ -1,4 +1,4 @@
-# Copyright (c) 2022 The ZMK Contributors
+# Copyright (c) 2022-2023 XiNGRZ
 # SPDX-License-Identifier: MIT
 
 description: Composing multiple LED strip devices into one virtual device
@@ -6,10 +6,6 @@ description: Composing multiple LED strip devices into one virtual device
 compatible: "zmk,led-strip-composite"
 
 properties:
-  label:
-    type: string
-    required: true
-
   chain-length:
     type: int
     required: true

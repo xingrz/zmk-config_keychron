@@ -1,6 +1,4 @@
-# Keychron Q1 board configuration
-
-# Copyright (c) 2022 The ZMK Contributors
+# Copyright (c) 2022-2023 XiNGRZ
 # SPDX-License-Identifier: MIT
 
 if BOARD_KEYCHRON_Q1
@@ -14,6 +12,8 @@ config ZMK_KEYBOARD_NAME
 config ZMK_USB
 	default y
 
-rsource "drivers/Kconfig"
+choice ZMK_HID_REPORT_TYPE
+	default ZMK_HID_REPORT_TYPE_NKRO
+endchoice
 
 endif # BOARD_KEYCHRON_Q1

@@ -1,4 +1,4 @@
-# Copyright (c) 2022 The ZMK Contributors
+# Copyright (c) 2022-2023 XiNGRZ
 # SPDX-License-Identifier: MIT
 
 board_runner_args(dfu-util "--pid=0483:DF11" "--alt=0" "--dfuse")

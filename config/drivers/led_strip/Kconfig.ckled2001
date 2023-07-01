@@ -1,0 +1,10 @@
+# Copyright (c) 2022-2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+config CKLED2001
+	bool "CKLED2001 LED strip controller"
+	default y
+	depends on DT_HAS_ZMK_CKLED2001_ENABLED
+	select I2C
+	help
+	  Enable driver for CKLED2001 LED strip controller.

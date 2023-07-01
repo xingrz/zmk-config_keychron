@@ -1,4 +1,4 @@
-# Copyright (c) 2022 The ZMK Contributors
+# Copyright (c) 2022-2023 XiNGRZ
 # SPDX-License-Identifier: MIT
 
 description: CKLED2001 LED strip controller
@@ -8,10 +8,6 @@ compatible: "zmk,ckled2001"
 include: [i2c-device.yaml]
 
 properties:
-  label:
-    type: string
-    required: true
-
   chain-length:
     type: int
     required: true

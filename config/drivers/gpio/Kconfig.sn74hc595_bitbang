@@ -1,0 +1,20 @@
+# Copyright (c) 2022-2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+menuconfig GPIO_SN74HC595_BITBANG
+	bool "SN74HC595 shift register, using GPIO bit-bang"
+	default y
+	depends on DT_HAS_TI_SN74HC595_BITBANG_ENABLED
+	select GPIO
+	help
+	  Enable driver for SN74HC595 shift register
+
+if GPIO_SN74HC595_BITBANG
+
+config GPIO_SN74HC595_BITBANG_INIT_PRIORITY
+	int "Init priority"
+	default 45
+	help
+	  Device driver initialization priority.
+
+endif # GPIO_SN74HC595_BITBANG
