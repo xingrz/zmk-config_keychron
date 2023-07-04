@@ -5,3 +5,4 @@ config LED_STRIP_COMPOSITE
 	bool "Composing multiple LED strip devices into one virtual device"
 	default y
 	depends on DT_HAS_ZMK_LED_STRIP_COMPOSITE_ENABLED
+	select LED_STRIP

@@ -6,5 +6,6 @@ config CKLED2001
 	default y
 	depends on DT_HAS_ZMK_CKLED2001_ENABLED
 	select I2C
+	select LED_STRIP
 	help
 	  Enable driver for CKLED2001 LED strip controller.
