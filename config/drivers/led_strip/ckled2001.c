@@ -57,45 +57,55 @@ struct ckled2001_channel_map {
 struct ckled2001_config {
 	struct i2c_dt_spec bus;
 	uint8_t scan_phase_channels;
-	struct ckled2001_channel_map *map;
+	const struct ckled2001_channel_map *map;
 	uint32_t map_cnt;
-	uint8_t *pwm_buffer;
+};
+
+struct ckled2001_data {
+	uint8_t pwm_buffer[LED_PWM_CNT];
 };
 
 static inline int ckled2001_write_reg(const struct device *dev, uint8_t reg, uint8_t value)
 {
 	const struct ckled2001_config *config = dev->config;
+
 	return i2c_burst_write_dt(&config->bus, reg, &value, 1);
 }
 
 static inline int ckled2001_set_control(const struct device *dev, uint8_t value)
 {
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, LED_CONTROL_PAGE);
+
 	for (int i = 0; i < LED_CONTROL_CNT; i++) {
 		ckled2001_write_reg(dev, i, value);
 	}
+
 	return 0;
 }
 
 static inline int ckled2001_flush_pwm_buffer(const struct device *dev)
 {
 	const struct ckled2001_config *config = dev->config;
+	struct ckled2001_data *data = dev->data;
+
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, LED_PWM_PAGE);
-	return i2c_burst_write_dt(&config->bus, 0, (const uint8_t *)config->pwm_buffer,
-				  LED_PWM_CNT);
+
+	return i2c_burst_write_dt(&config->bus, 0, data->pwm_buffer, LED_PWM_CNT);
 }
 
 static int ckled2001_update_rgb(const struct device *dev, struct led_rgb *pixels, size_t num_pixels)
 {
 	const struct ckled2001_config *config = dev->config;
+	struct ckled2001_data *data = dev->data;
 
 	if (num_pixels > config->map_cnt) {
 		num_pixels = config->map_cnt;
 	}
+
 	for (size_t i = 0; i < num_pixels; i++) {
-		config->pwm_buffer[config->map[i].ch_r] = pixels[i].r;
-		config->pwm_buffer[config->map[i].ch_g] = pixels[i].g;
-		config->pwm_buffer[config->map[i].ch_b] = pixels[i].b;
+		data->pwm_buffer[config->map[i].ch_r] = pixels[i].r;
+		data->pwm_buffer[config->map[i].ch_g] = pixels[i].g;
+		data->pwm_buffer[config->map[i].ch_b] = pixels[i].b;
 	}
 
 	return ckled2001_flush_pwm_buffer(dev);
@@ -120,7 +130,7 @@ static int ckled2001_init(const struct device *dev)
 
 	k_usleep(300);
 
-	// Set functions
+	/* Set functions */
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, FUNCTION_PAGE);
 	ckled2001_write_reg(dev, REG_CONFIGRATION, MSKSW_SHUTDOWN_MODE);
 	ckled2001_write_reg(dev, REG_PDU, MSKSET_CA_CB_CHANNEL);
@@ -130,14 +140,13 @@ static int ckled2001_init(const struct device *dev)
 			    MSKDRIVING_SINKING_CHHANNEL_SLEWRATE_ENABLE);
 	ckled2001_write_reg(dev, REG_SOFTWARE_SLEEP, MSKSLEEP_DISABLE);
 
-	// Turn off all LEDs
+	/* Turn off all LEDs */
 	ckled2001_set_control(dev, 0x00);
 
-	// Init PWM page
-	memset(config->pwm_buffer, 0x00, LED_PWM_CNT);
+	/* Init PWM page */
 	ckled2001_flush_pwm_buffer(dev);
 
-	// Init current page
+	/* Init current page */
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, CURRENT_TUNE_PAGE);
 	for (int i = 0; i < CURRENT_TUNE_CNT; i++) {
 		switch (i) {
@@ -153,10 +162,10 @@ static int ckled2001_init(const struct device *dev)
 		}
 	}
 
-	// Turn on all LEDs
+	/* Turn on all LEDs */
 	ckled2001_set_control(dev, 0xFF);
 
-	// Set to normal mode
+	/* Set to normal mode */
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, FUNCTION_PAGE);
 	ckled2001_write_reg(dev, REG_CONFIGRATION, MSKSW_NORMAL_MODE);
 
@@ -169,19 +178,19 @@ static const struct led_strip_driver_api ckled2001_api = {
 };
 
 #define CKLED2001_INIT(n)                                                                          \
-	static uint8_t ckled2001_channel_map##n[] = DT_INST_PROP(n, map);                          \
+	static struct ckled2001_data ckled2001_data_##n;                                           \
                                                                                                    \
-	static uint8_t ckled2001_pwm_buffer_##n[LED_PWM_CNT];                                      \
+	static const uint8_t ckled2001_channel_map##n[] = DT_INST_PROP(n, map);                    \
                                                                                                    \
 	static const struct ckled2001_config ckled2001_config_##n = {                              \
 		.bus = I2C_DT_SPEC_INST_GET(n),                                                    \
 		.scan_phase_channels = DT_INST_PROP_OR(n, scan_phase_channels, 12),                \
-		.map = (struct ckled2001_channel_map *)ckled2001_channel_map##n,                   \
+		.map = (const struct ckled2001_channel_map *)ckled2001_channel_map##n,             \
 		.map_cnt = DT_INST_PROP_LEN(n, map) / 3,                                           \
-		.pwm_buffer = ckled2001_pwm_buffer_##n,                                            \
 	};                                                                                         \
                                                                                                    \
-	DEVICE_DT_INST_DEFINE(n, &ckled2001_init, NULL, NULL, &ckled2001_config_##n, POST_KERNEL,  \
-			      CONFIG_LED_STRIP_INIT_PRIORITY, &ckled2001_api);
+	DEVICE_DT_INST_DEFINE(n, &ckled2001_init, NULL, &ckled2001_data_##n,                       \
+			      &ckled2001_config_##n, POST_KERNEL, CONFIG_LED_STRIP_INIT_PRIORITY,  \
+			      &ckled2001_api);
 
 DT_INST_FOREACH_STATUS_OKAY(CKLED2001_INIT);
