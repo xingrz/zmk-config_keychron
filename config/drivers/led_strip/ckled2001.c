@@ -56,6 +56,7 @@ struct ckled2001_channel_map {
 
 struct ckled2001_config {
 	struct i2c_dt_spec bus;
+	uint32_t init_delay_us;
 	uint8_t scan_phase_channels;
 	const struct ckled2001_channel_map *map;
 	uint32_t map_cnt;
@@ -128,7 +129,7 @@ static int ckled2001_init(const struct device *dev)
 		return -ENODEV;
 	}
 
-	k_usleep(300);
+	k_usleep(config->init_delay_us);
 
 	/* Set functions */
 	ckled2001_write_reg(dev, REG_SET_CMD_PAGE, FUNCTION_PAGE);
@@ -184,6 +185,7 @@ static const struct led_strip_driver_api ckled2001_api = {
                                                                                                    \
 	static const struct ckled2001_config ckled2001_config_##n = {                              \
 		.bus = I2C_DT_SPEC_INST_GET(n),                                                    \
+		.init_delay_us = DT_INST_PROP(n, init_delay_us),                                   \
 		.scan_phase_channels = DT_INST_PROP_OR(n, scan_phase_channels, 12),                \
 		.map = (const struct ckled2001_channel_map *)ckled2001_channel_map##n,             \
 		.map_cnt = DT_INST_PROP_LEN(n, map) / 3,                                           \

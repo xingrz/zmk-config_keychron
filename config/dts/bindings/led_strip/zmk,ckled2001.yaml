@@ -12,6 +12,10 @@ properties:
     type: int
     required: true
 
+  init-delay-us:
+    type: int
+    default: 300
+
   scan-phase-channels:
     type: int
     default: 12
