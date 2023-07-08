@@ -1,0 +1,21 @@
+# Copyright (c) 2022-2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+config BLE_EXT_CKBT51
+	bool "CKBT51 external BT controller"
+	default y
+	depends on DT_HAS_KEYCHRON_CKBT51_ENABLED
+	select SERIAL
+	select UART_INTERRUPT_DRIVEN
+
+if BLE_EXT_CKBT51
+
+config BLE_EXT_CKBT51_THREAD_PRIORITY
+	int "Thread priority"
+	default 10
+
+config BLE_EXT_CKBT51_THREAD_STACK_SIZE
+	int "Thread stack size"
+	default 1024
+
+endif # BLE_EXT_CKBT51

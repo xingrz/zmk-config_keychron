@@ -1,0 +1,27 @@
+# Copyright (c) 2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+description: CKBT51 external BT controller
+
+compatible: "keychron,ckbt51"
+
+properties:
+  profile-count:
+    type: int
+    const: 3
+
+  uart:
+    type: phandle
+    required: true
+
+  reset-gpios:
+    type: phandle-array
+    required: true
+
+  wakeup-gpios:
+    type: phandle-array
+    required: true
+
+  wakeup-delay-us:
+    type: int
+    default: 3000
