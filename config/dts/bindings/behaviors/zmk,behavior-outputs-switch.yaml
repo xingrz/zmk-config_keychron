@@ -1,0 +1,8 @@
+# Copyright (c) 2023 XiNGRZ
+# SPDX-License-Identifier: MIT
+
+description: Switch outputs on press/release behavior
+
+compatible: "zmk,behavior-outputs-switch"
+
+include: two_param.yaml

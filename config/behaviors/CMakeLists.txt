@@ -1,5 +1,4 @@
 # Copyright (c) 2023 XiNGRZ
 # SPDX-License-Identifier: MIT
 
-add_subdirectory(behaviors)
-add_subdirectory(drivers)
+zephyr_sources(behavior_outputs_switch.c)
