@@ -3,7 +3,7 @@
 
 description: CKLED2001 LED strip controller
 
-compatible: "zmk,ckled2001"
+compatible: "keychron,ckled2001"
 
 include: [i2c-device.yaml]
 

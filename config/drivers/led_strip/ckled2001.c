@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-#define DT_DRV_COMPAT zmk_ckled2001
+#define DT_DRV_COMPAT keychron_ckled2001
 
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
