@@ -160,7 +160,7 @@
 	clock-frequency = <DT_FREQ_K(400)>;
 
 	led_strip_0: ckled2001@77 {
-		compatible = "zmk,ckled2001";
+		compatible = "keychron,ckled2001";
 
 		reg = <0x77>;
 		chain-length = <45>;
@@ -222,7 +222,7 @@
 	};
 
 	led_strip_1: ckled2001@74 {
-		compatible = "zmk,ckled2001";
+		compatible = "keychron,ckled2001";
 
 		reg = <0x74>;
 		chain-length = <37>;
